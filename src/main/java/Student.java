@@ -1,8 +1,8 @@
 public class Student implements Comparable<Student>{
     private String name;
     private int age;
-    private int studentNumber;
-    public Student(String name, int age, int studentNumber) {
+    private String studentNumber;
+    public Student(String name, int age, String studentNumber) {
         this.name = name;
         this.age = age;
         this.studentNumber = studentNumber;
@@ -19,10 +19,10 @@ public class Student implements Comparable<Student>{
     public void setAge(int age) {
         this.age = age;
     }
-    public int getStudentNumber() {
+    public String getStudentNumber() {
         return studentNumber;
     }
-    public void setStudentNumber(int studentNumber) {
+    public void setStudentNumber(String studentNumber) {
         this.studentNumber = studentNumber;
     }
     @Override
@@ -31,6 +31,6 @@ public class Student implements Comparable<Student>{
     }
     @Override
     public int compareTo(Student given) {
-        return this.studentNumber - given.studentNumber;
+        return Integer.parseInt(this.studentNumber) - Integer.parseInt(given.studentNumber);
     }
 }

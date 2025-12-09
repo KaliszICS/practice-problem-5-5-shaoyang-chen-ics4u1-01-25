@@ -24,17 +24,25 @@ public class Card implements Comparable<Card>{
     @Override
     public int compareTo(Card given) {
         int myValue = convertNameToInt(this.name);
-        int otherValue = convertNameToInt(given.getName());
-        if (myValue != otherValue) {
-            return myValue - otherValue;
-        }
+        int givenValue = convertNameToInt(given.getName());
         int mySuit = convertSuitToInt(this.suit);
-        int otherSuit = convertSuitToInt(given.getSuit());
-        return mySuit - otherSuit;
+        int givenSuit = convertSuitToInt(given.getSuit());
+        boolean isValueEqual = myValue == givenValue;
+        boolean isSuitEqual = mySuit == givenSuit;
+        if (isValueEqual && isSuitEqual) {
+            return 0;
+        }
+        if (isValueEqual && !isSuitEqual) {
+            return mySuit - givenSuit;
+        }
+        if (isSuitEqual && !isValueEqual) {
+            return myValue - givenValue;
+        }
+        return -1; // edge case
     }
     private int convertNameToInt(String name) {
         int power = 0;
-        switch (this.name) {
+        switch (name) {
             case "Ace": power = 1; break;
             case "2": power = 2; break;
             case "3": power = 3; break;
@@ -53,7 +61,7 @@ public class Card implements Comparable<Card>{
     }
     private  int convertSuitToInt(String suit) {
         int power = 0;
-        switch (this.suit) {
+        switch (suit) {
             case "Hearts": power = 1; break;
             case "Clubs": power = 2; break;
             case "Diamonds": power = 3; break;
